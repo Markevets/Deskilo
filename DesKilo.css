@@ -1,0 +1,596 @@
+:root{
+  --belier:linear-gradient(black,rgba(0,0,0,0.5));
+}
+* {
+    
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      transition: background-color 0.4s, color 0.4s;
+    }
+  @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap');
+    #banner{
+              background-image: linear-gradient(to right, rgba(0, 0, 0, 0.5), rgba(100, 0, 0, 0.5)), url("https://images-ext-1.discordapp.net/external/YYw8IlRiKBpkqHMGRi1N0rDLgth2-uZ8uMc22_MHEt0/%3Fs%3D640x640%26k%3D20%26c%3DIXB8rKzjU0xwuqPq149Foh9UYAkrUibyqp6zcwPFFP0%3D/https/media.istockphoto.com/id/1207037890/es/v%25C3%25ADdeo/hombre-comiendo-ensalada-fresca-sabrosa-alimentaci%25C3%25B3n-saludable.jpg?format=webp");
+  background-color: #f0f0f0;
+  background-blend-mode: multiply; /* Mezcla la imagen con el fondo */
+  background-position: center;
+  background-size: cover;
+    }
+   /* #banner-form{
+      background-image:url(https://centromedicoabc.com/storage/2023/02/alimentacion-saludable.jpg);
+    }*/
+    body {
+      font-family: 'Rubik', sans-serif;
+    
+      background-color: #000;
+      color: #fff;
+      min-height: 100vh;
+    }
+
+    body.light-theme {
+      background-color: #fefefe;
+      color: #222;
+    }
+
+    header {
+      background-color: #101010;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      gap: 1rem;
+      transition: background-color 0.4s;
+    }
+
+    body.light-theme header {
+      background-color: #eee;
+    }
+
+    .ruby-3d {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(145deg, #ff4d4d, #b30000);
+      border: 2px solid #700000;
+      border-radius: 10% 40% 10% 40% / 40% 10% 40% 10%;
+      box-shadow:
+        inset -4px -4px 8px rgba(255,255,255,0.3),
+        inset 4px 4px 8px rgba(0,0,0,0.4),
+        0 0 10px red;
+      animation: rubyShine 3s infinite ease-in-out;
+    }
+
+    @keyframes rubyShine {
+      0% { transform: rotate(45deg) scale(1); filter: brightness(1); }
+      50% { transform: rotate(45deg) scale(1.05); filter: brightness(1.3); }
+      100% { transform: rotate(45deg) scale(1); filter: brightness(1); }
+    }
+
+    .logo-text {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #f26b38;
+      user-select: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      animation: pulseTitle 3s infinite alternate;
+      font-family: 'Rubik', sans-serif;
+    }
+
+    body.light-theme .logo-text {
+      color: #d2691e;
+    }
+
+    .logo-text:hover {
+      color: #ff4d4d;
+      text-shadow:
+        0 0 5px #ff4d4d,
+        0 0 10px #ff1a1a,
+        0 0 20px #ff1a1a;
+      transform: scale(1.1);
+    }
+
+    nav {
+      margin-left: auto;
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1rem;
+      transition: color 0.3s;
+    }
+
+    body.light-theme nav a {
+      color: #222;
+    }
+
+    nav a:hover {
+      color: #f26b38;
+    }
+
+    .hero {
+      /*background: url('https://www.starplus.com/static/images/heroes/starplus-hero-banner.jpg') no-repeat center center/cover;
+      */height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 2rem;
+      padding-top: 100px;
+      transition: background-color 0.4s;
+        background-image: linear-gradient(to right, rgba(0, 0, 0, 1),  rgba(100, 0, 0, 0.5)), url('https://centromedicoabc.com/storage/2023/02/alimentacion-saludable.jpg');
+  background-color: #f0f0f0;
+  background-blend-mode: multiply; /* Mezcla la imagen con el fondo */
+  background-position: center;
+  background-size: cover;
+
+    }
+
+    body.light-theme .hero {
+      background: url('https://www.starplus.com/static/images/heroes/starplus-hero-banner.jpg') no-repeat center center/cover;
+      filter: brightness(0.85);
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      max-width: 700px;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      max-width: 600px;
+      margin: 1rem 0 2rem 0;
+    }
+
+    .btn-container {
+      display: flex;
+      gap: 1rem;
+    }
+
+    button {
+      background-color: #f26b38;
+      border: none;
+      color: #fff;
+      padding: 0.8rem 2rem;
+      font-size: 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.2s;
+      user-select: none;
+    }
+
+    button:hover {
+      background-color: #d65b28;
+      transform: scale(1.05);
+    }
+
+    button:active {
+      transform: scale(0.95);
+    }
+
+    #btn-premium {
+      background-color: #ff4d4d;
+    }
+
+    #btn-premium:hover {
+      background-color: #e03b3b;
+    }
+
+    .section {
+      padding: 2rem;
+    }
+
+    .section h2 {
+      margin-bottom: 1rem;
+    }
+
+    .ruby-emoji {
+      width: 20px;
+      height: 20px;
+      background: linear-gradient(145deg, #ff4d4d, #b30000);
+      border: 2px solid #700000;
+      border-radius: 50% 30% 50% 30% / 30% 50% 30% 50%;
+      box-shadow: 0 0 6px red;
+      animation: floatRuby 2s ease-in-out infinite;
+    }
+
+    @keyframes floatRuby {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+
+    .split-hover {
+      display: inline-block;
+      transition: letter-spacing 0.3s ease, text-shadow 0.3s ease;
+    }
+
+    .split-hover:hover {
+      letter-spacing: 4px;
+      text-shadow: 0 0 5px #ff4d4d, 0 0 10px #ff1a1a;
+    }
+
+    /* Modal styles */
+    #modal-premium {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.7);
+      justify-content: center;
+      align-items: center;
+      z-index: 1500;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    #modal-premium.show {
+      opacity: 1;
+    }
+
+    #modal-content {
+      background: #111;
+      padding: 1.5rem 2rem;
+      border-radius: 8px;
+      max-width: 400px;
+      width: 90%;
+      color: #fff;
+      box-shadow: 0 0 10px #ff4d4d;
+      animation: fadeInModal 0.3s ease forwards;
+      position: relative;
+    }
+
+    #modal-content h3 {
+      margin-bottom: 1rem;
+      color: #ff4d4d;
+      text-align: center;
+    }
+
+    #modal-content ul {
+      list-style: disc inside;
+      line-height: 1.5;
+      margin-bottom: 1rem;
+    }
+
+    #modal-content button.close-btn {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: transparent;
+      border: none;
+      font-size: 1.3rem;
+      color: #ff4d4d;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    #modal-content button.close-btn:hover {
+      color: #fff;
+    }
+
+    .btn-compra {
+      display: inline-block;
+      background-color: #f26b38;
+      color: white;
+      padding: 0.6rem 1.5rem;
+      border-radius: 4px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .btn-compra:hover {
+      background-color: #d65b28;
+      transform: scale(1.05);
+    }
+
+    .btn-compra:active {
+      transform: scale(0.95);
+    }
+
+    @keyframes fadeInModal {
+      from {
+        opacity: 0;
+        transform: scale(0.9);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    /* Botón toggle modo claro/oscuro */
+    #btn-toggle-theme {
+      position: fixed;
+      top: 15px;
+      right: 15px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: none;
+      background-color: #f26b38;
+      box-shadow: 0 0 8px #f26b38;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: background-color 0.3s, box-shadow 0.3s;
+      z-index: 2000;
+      user-select: none;
+    }
+
+    #btn-toggle-theme:hover {
+      background-color: #d65b28;
+      box-shadow: 0 0 15px #d65b28;
+    }
+
+    #btn-toggle-theme svg {
+      width: 22px;
+      height: 22px;
+      fill: white;
+      transition: transform 0.3s ease;
+    }
+
+    body.light-theme #btn-toggle-theme {
+      background-color: #222;
+      box-shadow: 0 0 8px #222;
+    }
+
+    body.light-theme #btn-toggle-theme:hover {
+      background-color: #555;
+      box-shadow: 0 0 15px #555;
+    }
+
+    /* Botón circular chatbot */
+    #btn-chatbot {
+      position: fixed;
+      bottom: 25px;
+      right: 15px;
+      width: 52px;
+      height: 52px;
+      background-color: #f26b38;
+      border-radius: 50%;
+      border: none;
+      box-shadow: 0 0 8px #f26b38;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 2100;
+      transition: background-color 0.3s, box-shadow 0.3s;
+      user-select: none;
+    }
+
+    #btn-chatbot:hover {
+      background-color: #d65b28;
+      box-shadow: 0 0 15px #d65b28;
+    }
+
+    /* Icono robot SVG */
+    #btn-chatbot svg {
+      width: 28px;
+      height: 28px;
+      fill: white;
+    }
+
+    /* Ventana de chat */
+    #chatbot-window {
+      display: none;
+      position: fixed;
+      bottom: 85px;
+      right: 15px;
+      width: 280px;
+      max-height: 360px;
+      background: #111;
+      border-radius: 12px;
+      box-shadow: 0 0 15px #f26b38;
+      flex-direction: column;
+      overflow: hidden;
+      z-index: 2200;
+      color: white;
+      font-size: 0.9rem;
+      user-select: text;
+    }
+
+    #chatbot-header {
+      background: #f26b38;
+      padding: 0.5rem 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 600;
+      user-select: none;
+    }
+
+    #chatbot-close {
+      background: transparent;
+      border: none;
+      color: white;
+      font-size: 1.3rem;
+      cursor: pointer;
+      transition: color 0.2s ease;
+      user-select: none;
+    }
+
+    #chatbot-close:hover {
+      color: #ffdddd;
+    }
+
+    #chatbot-messages {
+      flex-grow: 1;
+      padding: 10px;
+      overflow-y: auto;
+      background: #222;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .message {
+      padding: 8px 12px;
+      border-radius: 14px;
+      max-width: 80%;
+      word-wrap: break-word;
+      line-height: 1.3;
+    }
+
+    .bot-message {
+      background: #ff704d;
+      align-self: flex-start;
+      color: white;
+      box-shadow: 0 0 8px #ff704d88;
+    }
+
+    .user-message {
+      background: #4d79ff;
+      align-self: flex-end;
+      color: white;
+      box-shadow: 0 0 8px #4d79ff88;
+    }
+
+    #chatbot-input-container {
+      display: flex;
+      border-top: 1px solid #444;
+      background: #111;
+      padding: 8px 10px;
+    }
+
+    #chatbot-input {
+      flex-grow: 1;
+      border: none;
+      background: #222;
+      color: white;
+      padding: 6px 10px;
+      border-radius: 12px;
+      font-size: 0.9rem;
+      outline-offset: 2px;
+      outline-color: #f26b38;
+      transition: background-color 0.3s;
+    }
+
+    #chatbot-input::placeholder {
+      color: #bbb;
+    }
+
+    #chatbot-input:focus {
+      background: #333;
+    }
+
+    #chatbot-send {
+      background-color: #f26b38;
+      border: none;
+      color: white;
+      padding: 6px 14px;
+      margin-left: 8px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background-color 0.3s;
+      user-select: none;
+    }
+
+    #chatbot-send:hover {
+      background-color: #d65b28;
+    }
+
+    #chatbot-send:active {
+      transform: scale(0.95);
+    }
+    /* Estilos del formulario de Deskilo */
+        input, select, button {
+      width: 95%;
+      padding: 8px;
+      margin: 6px 0;
+      border-radius: .5rem;
+      border-style: none;
+
+    }
+    input[type="number"]{
+        width: 92.5%;
+    }
+    option {
+      padding: 8px;
+      border-radius:.25rem ;
+    }
+    label{
+      display: block;
+      margin: 10px 0 5px;
+      font-weight: bold;
+    }
+    
+    button {
+
+      border: none;
+      cursor: pointer;
+    }
+    .resultado {
+      background: #e6ffe6;
+      padding: 10px;
+      margin-top: 10px;
+      border-left: 4px solid green;
+    }
+    .zona-info {
+      background: #fff3cd;
+      padding: 10px;
+      margin-top: 10px;
+      border-left: 4px solid #ffc107;
+    }
+    svg {
+      width: 100%;
+      max-width: 350px;
+      display: block;
+      margin: 15px auto;
+    }
+    .container {
+      max-width: 500px;
+      margin: auto;
+      background-color: #1a1a1a;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(255, 0, 0, 0.4);
+    }
+    .container h1 {
+      text-align: center;
+      color: #ff0000;
+      margin-bottom: 20px;
+    }
+    .container label {
+      display: block;
+      margin-top: 15px;
+    }
+    .container input, select {
+      width: 100%;
+      padding: 10px;
+      background-color: #222;
+      border: 1px solid #444;
+      border-radius: 5px;
+      color: white;
+      margin-top: 5px;
+    }
+    .container button {
+      width: 100%;
+      margin-top: 20px;
+      padding: 12px;
+      background-color: #ff0000;
+      color: white;
+      font-weight: bold;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .container .resultado {
+      margin-top: 25px;
+      padding: 15px;
+      background-color: #222;
+      border: 1px solid #444;
+      border-radius: 5px;
+    }

@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<script>
+    document.addEventListener("DOMContentLoaded", function() 
+    {
+      // Scroll suave para anclas
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+          const href = this.getAttribute('href');
+          if (href.length > 1) {
+            e.preventDefault();
+            const target = document.querySelector(href);
+            if (target) {
+              window.scrollTo({
+                top: target.offsetTop - 70,
+                behavior: 'smooth'
+              });
+            }
+          }
+        });
+      });
+
+      // Abrir modal premium
+      const btnPremium = document.getElementById('btn-premium');
+      const modal = document.getElementById('modal-premium');
+      const modalClose = document.getElementById('modal-close');
+
+      btnPremium.addEventListener('click', () => 
+      {
+        modal.style.display = 'flex';
+        setTimeout(() => 
+        {
+          modal.classList.add('show');
+        }, 10);
+      });
+
+      modalClose.addEventListener('click', () => {
+        modal.classList.remove('show');
+        setTimeout(() => {
+          modal.style.display = 'none';
+        }, 300);
+      });
+
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          modalClose.click();
+        }
+      });
+
+      // Toggle claro/oscuro
+      const btnToggle = document.getElementById('btn-toggle-theme');
+      const body = document.body;
+
+      // Cargar preferencia guardada
+      if(sessionStorage.getItem('theme') === 'light') {
+        body.classList.add('light-theme');
+      }
+
+      btnToggle.addEventListener('click', () => {
+        body.classList.toggle('light-theme');
+        if(body.classList.contains('light-theme')) {
+          sessionStorage.setItem('theme', 'light');
+        } else {
+          sessionStorage.setItem('theme', 'dark');
+        }
+      });});
+
+      
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Calculadora</title>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="DesKilo.css" />
+</head>
+<body>
+  <header>
+    <div class="ruby-3d"></div>
+    <div class="logo-text">DesKilo</div>
+    <nav>
+      <a href="inicio.html">Inicio</a>
+      <a href="inicio.html#sobre-nosotros">Sobre nosotros</a>
+      <a href="Deskilo-form.html">Calculadora DSK</a>
+      <a href="frequency-asnwered-questions.html">FAQ</a>
+      <a href="#">faq</a>
+    </nav>
+  </header>
+
+  <section class="hero" id="banner-form" >
+    <div id="gradient-banner"></div>
+    <div class="hero-content">
+      <center><h1>alculadora</h1></center>
+      <p>Descubre cual es tu cantidad de calorias diarias necesarias . </p>
+      <div class="btn-container">
+        <button id="btn-explora">Explora ahora</button>
+        <button id="btn-premium">Hazte Premium</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="sobre-nosotros" class="section">
+    <div style="display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; margin-bottom: 2rem;">
+      <div class="ruby-emoji"></div>
+      <hr style="flex-grow: 1; border: none; border-top: 3px solid red;">
+      <div class="ruby-emoji"></div>
+    </div>
+    
+<div id="app">
+<section>
+    <div class="container">
+     <h1>Calculadora de Calorías</h1>
+
+  <label>Sexo:</label><br>
+  <select id="sexo">
+    <option value="hombre">Hombre</option>
+    <option value="mujer">Mujer</option>
+  </select><br>
+
+  <label>Edad (años):</label><br>
+  <input type="number" id="edad"><br>
+
+  <label>Peso (kg):</label><br>
+  <input type="number" id="peso"><br>
+
+  <label>Altura (cm):</label><br>
+  <input type="number" id="altura"><br>
+
+  <label>Actividad física:</label><br>
+  <select id="actividad">
+    <option value="1.2">Sedentario (poco o ningún ejercicio)</option>
+    <option value="1.375">Ligera  (ejercicio ligero 1-3 días/semana)</option>
+    <option value="1.55">Moderada (ejercicio moderado 3-5 días/semana)</option>
+    <option value="1.725">Intensa (ejercicio intenso 6-7 días/semana)</option>
+    <option value="1.9">Muy intensa (entrenamientos físicos diarios o trabajo físico)</option>
+  </select><br>
+
+
+  <div class="resultado" id="resultado" style="display: none;">
+    <p><strong>TMB:</strong> <span id="tmb"></span> cal</p>
+    <p><strong>TDEE:</strong> <span id="tdee"></span> cal</p>
+    <p><strong>Déficit calórico:</strong> <span id="deficit"></span> cal</p>
+    <p><strong>Superávit (ganar músculo):</strong> <span id="superavit"></span> cal</p>
+  </div>
+
+  <div class="historial" id="historial" style="display: none;">
+    <h3>📜 Historial</h3>
+    <div id="listaHistorial"></div>
+    <div class="acciones">
+      <button onclick="borrarHistorial()">🗑 Borrar historial</button>
+      <button onclick="descargarCSV()">📥 Descargar CSV</button>
+      <button onclick="descargarPDF()"><a href="dieta_sobrepeso.pdf" download="Dsk.pdf">📄 Descargar PDF</a></button>
+    </div>
+  </div>
+
+
+    <button onclick="calcularCalorias()">Calcular</button>
+
+    <div class="resultado" id="resultado" style="display:none;">
+      <h2>Resultado:</h2>
+      <p id="calorias"></p>
+    </div>
+  </div>
+
+  <div style="color:black" id="resultadoCalorias" class="resultado"></div>
+</section><br>
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; margin-bottom: 2rem;">
+      <div class="ruby-emoji"></div>
+      <hr style="flex-grow: 1; border: none; border-top: 3px solid red;">
+      <div class="ruby-emoji"></div>
+    </div><br>
+<section>
+  <h2>2. Recomendación por calorías</h2>
+  <input type="number" id="caloriasInput" placeholder="Ingresa tus calorías">
+  <button onclick="recomendarEjercicios()">Recomendar ejercicios</button>
+  <div style="color:black" id="resultadoEjercicios" class="resultado"></div>
+</section>
+  </section><br>
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; margin-bottom: 2rem;">
+      <div class="ruby-emoji"></div>
+      <hr style="flex-grow: 1; border: none; border-top: 3px solid red;">
+      <div class="ruby-emoji"></div>
+    </div>  <br>
+<section>
+  <h2>          3. Cuerpo humano interactivo          </h2>
+  <p>           Haz clic sobre una parte del cuerpo para ver un ejercicio recomendado y sus beneficios.            </p>
+
+  <!-- Cuerpo humano geométrico SVG -->
+  <svg viewBox="0 0 300 400">
+    <!-- Cabeza -->
+    <circle cx="150" cy="40" r="25" fill="#ccc" onclick="mostrarZona('cabeza')" />
+
+    <!-- Pecho -->
+    <rect x="115" y="70" width="70" height="50" fill="#aaddff" onclick="mostrarZona('pecho')" />
+
+    <!-- Abdomen -->
+    <rect x="125" y="125" width="50" height="50" fill="#ffddaa" onclick="mostrarZona('abdomen')" />
+
+    <!-- Brazo izquierdo -->
+    <rect x="80" y="70" width="30" height="100" fill="#ccffaa" onclick="mostrarZona('brazo izquierdo')" />
+
+    <!-- Brazo derecho -->
+    <rect x="190" y="70" width="30" height="100" fill="#ccffaa" onclick="mostrarZona('brazo derecho')" />
+
+    <!-- Pierna izquierda -->
+    <rect x="125" y="180" width="20" height="90" fill="#ddddff" onclick="mostrarZona('pierna izquierda')" />
+
+    <!-- Pierna derecha -->
+    <rect x="155" y="180" width="20" height="90" fill="#ddddff" onclick="mostrarZona('pierna derecha')" />
+  </svg>
+
+  <div style="color:black" id="zonaResultado" class="zona-info"></div>
+</section>
+  <!-- Modal Premium -->
+  <div id="modal-premium">
+    <div id="modal-content">
+      <button class="close-btn" id="modal-close" aria-label="Cerrar ventana">&times;</button>
+      <h3>Beneficios de ser Premium</h3>
+      <ul>
+        <li>Descuentos exclusivos en línea: promociones especiales, 10% o 15% de descuento en tu primera compra.</li>
+        <li>Envío gratis a partir de cierto monto mínimo.</li>
+        <li>Programas de fidelidad o puntos para canjear productos, descuentos o regalos.</li>
+        <li>Asesoría personalizada gratuita con nutricionista o asesor.</li>
+        <li>Recetas y guías exclusivas solo para clientes premium.</li>
+        <li>Garantía de satisfacción con devoluciones o cambios fáciles.</li>
+        <li>Paquetes o kits saludables seleccionados para facilitar tu compra.</li>
+        <li>Acceso anticipado a novedades y productos nuevos.</li>
+      </ul>
+      <div style="text-align:center; margin-top:1rem;">
+        <a href="about:blank" target="_blank" rel="noopener noreferrer" class="btn-compra">Compra Ahora</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Botón claro/oscuro -->
+  <button id="btn-toggle-theme" aria-label="Cambiar tema claro y oscuro" title="Cambiar tema">
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        
+        <path d="M12 3a9 9 0 0 0 0 18 9 9 0 0 0 0-18zM12 1a11 11 0 0 1 0 22 11 11 0 0 1 0-22z"/>
+    </svg>
+  </button>
+<script>
+  function calcular() {
+      const sexo = document.getElementById("sexo").value;
+      const edad = parseInt(document.getElementById("edad").value);
+      const peso = parseFloat(document.getElementById("peso").value);
+      const altura = parseFloat(document.getElementById("altura").value);
+      const actividad = parseFloat(document.getElementById("actividad").value);
+
+      let tmb;
+      if (sexo === "hombre") {
+        tmb = 88.36 + (13.4 * peso) + (4.8 * altura) - (5.7 * edad);
+      } else {
+        tmb = 447.6 + (9.2 * peso) + (3.1 * altura) - (4.3 * edad);
+      }
+
+      const tdee = tmb * actividad;
+      const deficit = tdee - 500;
+      const superavit = tdee + 300;
+
+      // Mostrar resultado actual
+      document.getElementById("tmb").textContent = tmb.toFixed(2);
+      document.getElementById("tdee").textContent = tdee.toFixed(2);
+      document.getElementById("deficit").textContent = deficit.toFixed(2);
+      document.getElementById("superavit").textContent = superavit.toFixed(2);
+      document.getElementById("resultado").style.display = "block";
+
+      // Guardar en historial
+      const nuevo = {
+        fecha: new Date().toLocaleString(),
+        sexo, edad, peso, altura,
+        tmb: tmb.toFixed(2),
+        tdee: tdee.toFixed(2),
+        deficit: deficit.toFixed(2),
+        superavit: superavit.toFixed(2)
+      };
+
+      let historial = JSON.parse(localStorage.getItem("historialCalorias")) || [];
+      historial.unshift(nuevo);
+      localStorage.setItem("historialCalorias", JSON.stringify(historial));
+
+      // Puedes enviar esto a tu servidor si usas login/backend
+      /*
+      fetch('https://tuservidor.com/api/guardarHistorial', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(nuevo)
+      });
+      */
+
+      mostrarHistorial();
+    }
+
+    function mostrarHistorial() {
+      const historial = JSON.parse(localStorage.getItem("historialCalorias")) || [];
+      const contenedor = document.getElementById("listaHistorial");
+      contenedor.innerHTML = "";
+
+      historial.forEach((registro, i) => {
+        const div = document.createElement("div");
+        div.className = "historial-item";
+        div.innerHTML = `
+          <strong>Cálculo ${i + 1}</strong> - ${registro.fecha}<br>
+          Sexo: ${registro.sexo} | Edad: ${registro.edad} | Peso: ${registro.peso} kg | Altura: ${registro.altura} cm<br>
+          TMB: ${registro.tmb} | TDEE: ${registro.tdee} | Déficit: ${registro.deficit} | Superávit: ${registro.superavit}
+        `;
+        contenedor.appendChild(div);
+      });
+
+      document.getElementById("historial").style.display = historial.length > 0 ? "block" : "none";
+    }
+
+    function borrarHistorial() {
+      localStorage.removeItem("historialCalorias");
+      mostrarHistorial();
+    }
+
+    function descargarCSV() {
+      const historial = JSON.parse(localStorage.getItem("historialCalorias")) || [];
+      if (historial.length === 0) return;
+
+      const encabezados = "Fecha,Sexo,Edad,Peso,Altura,TMB,TDEE,Déficit,Superávit\n";
+      const filas = historial.map(h => `${h.fecha},${h.sexo},${h.edad},${h.peso},${h.altura},${h.tmb},${h.tdee},${h.deficit},${h.superavit}`).join("\n");
+      const csv = encabezados + filas;
+
+      const blob = new Blob([csv], { type: "text/csv" });
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = "historial_calorias.csv";
+      link.click();
+    }
+
+    function descargarPDF() {
+      const historial = JSON.parse(localStorage.getItem("historialCalorias")) || [];
+      if (historial.length === 0) return;
+
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF();
+      doc.setFontSize(12);
+      doc.text("Historial de Cálculos de Calorías", 10, 10);
+
+      let y = 20;
+      historial.forEach((h, i) => {
+        const texto = `
+#${i + 1} - ${h.fecha}
+Sexo: ${h.sexo}, Edad: ${h.edad}, Peso: ${h.peso}kg, Altura: ${h.altura}cm
+TMB: ${h.tmb}, TDEE: ${h.tdee}, Déficit: ${h.deficit}, Superávit: ${h.superavit}
+        `.trim();
+        doc.text(texto, 10, y);
+        y += 30;
+        if (y > 270) {
+          doc.addPage();
+          y = 20;
+        }
+      });
+
+      doc.save("historial_calorias.pdf");
+    }
+
+    window.onload = mostrarHistorial;
+
+
+  function recomendarEjercicios() {
+    const calorias = parseFloat(document.getElementById("caloriasInput").value);
+    const resultado = document.getElementById("resultadoEjercicios");
+
+    if (isNaN(calorias)) {
+      resultado.innerHTML = "Ingresa un número válido.";
+      return;
+    }
+
+    let mensaje = "";
+    if (calorias < 1800) {
+      mensaje = "Recomendado: caminar, estiramientos suaves, yoga.";
+    } else if (calorias <= 2500) {
+      mensaje = "Recomendado: bicicleta, natación, trote moderado.";
+    } else {
+      mensaje = "Recomendado: HIIT, pesas, entrenamiento funcional intenso.";
+    }
+
+    resultado.innerHTML = mensaje;
+  }
+
+  function mostrarZona(zona) {
+    const info = {
+      "cabeza": {
+        ejercicio: "Relajación y respiración profunda",
+        beneficio: "Reduce el estrés y mejora la concentración."
+      },
+      "pecho": {
+        ejercicio: "Flexiones de pecho",
+        beneficio: "Fortalece pectorales, tríceps y deltoides."
+      },
+      "abdomen": {
+        ejercicio: "Planchas abdominales",
+        beneficio: "Mejora la postura y tonifica el abdomen."
+      },
+      "brazo izquierdo": {
+        ejercicio: "Curl de bíceps con mancuernas",
+        beneficio: "Desarrolla fuerza en brazos y antebrazos."
+      },
+      "brazo derecho": {
+        ejercicio: "Extensiones de tríceps",
+        beneficio: "Fortalece la parte posterior del brazo."
+      },
+      "pierna izquierda": {
+        ejercicio: "Sentadillas",
+        beneficio: "Desarrolla glúteos, cuádriceps y mejora equilibrio."
+      },
+      "pierna derecha": {
+        ejercicio: "Zancadas",
+        beneficio: "Fortalece piernas, glúteos y mejora coordinación."
+      }
+    };
+
+    const resultado = document.getElementById("zonaResultado");
+    const datos = info[zona];
+    resultado.innerHTML = `<strong>${zona.toUpperCase()}</strong><br>Ejercicio: ${datos.ejercicio}<br>Beneficio: ${datos.beneficio}`;
+  }
+</script>
+</body>
+</html>
